@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import mongoose from 'mongoose';
+// import mongoose from 'mongoose';
 import resolvers from './resolvers';
 import typeDefs from './typeDefs';
 
@@ -9,17 +9,17 @@ dotenv.config();
 
 const server = new ApolloServer({ typeDefs, resolvers });
 
-mongoose.connect(process.env.DB_URL, {
-  dbName: process.env.DB_NAME,
-  useUnifiedTopology: true,
-  useNewUrlParser: true,
-}, (error) => {
-  if (error) {
-    console.log('mongodb connect error', error);
-  } else {
-    console.log('mongodb connect success!');
-  }
-});
+// mongoose.connect(process.env.DB_URL, {
+//   dbName: process.env.DB_NAME,
+//   useUnifiedTopology: true,
+//   useNewUrlParser: true,
+// }, (error) => {
+//   if (error) {
+//     console.log('mongodb connect error', error);
+//   } else {
+//     console.log('mongodb connect success!');
+//   }
+// });
 
 const app = express();
 server.applyMiddleware({ app });
