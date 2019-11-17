@@ -1,13 +1,14 @@
 import dotenv from 'dotenv';
 import express from 'express';
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer, PubSub } from 'apollo-server-express';
 // import mongoose from 'mongoose';
 import resolvers from './resolvers';
 import typeDefs from './typeDefs';
 
 dotenv.config();
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const pubsub = new PubSub();
+const server = new ApolloServer({ typeDefs, resolvers, context: { pubsub } });
 
 // mongoose.connect(process.env.DB_URL, {
 //   dbName: process.env.DB_NAME,
