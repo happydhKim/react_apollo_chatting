@@ -2,11 +2,20 @@ import dotenv from 'dotenv';
 import express from 'express';
 import { ApolloServer, PubSub } from 'apollo-server-express';
 // import mongoose from 'mongoose';
+// import cors from 'cors';
 import resolvers from './resolvers';
 import typeDefs from './typeDefs';
 
 dotenv.config();
 
+
+// const corsOption = {
+//   origin: true,
+//   credentials: true,
+// };
+
+
+// app.use(cors(corsOption));
 const pubsub = new PubSub();
 const server = new ApolloServer({ typeDefs, resolvers, context: { pubsub } });
 
@@ -26,6 +35,7 @@ const app = express();
 server.applyMiddleware({ app });
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 
 app.get('/', (req, res) => {
   res.send('Express server start!');
