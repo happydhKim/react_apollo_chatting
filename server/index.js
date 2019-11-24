@@ -15,7 +15,6 @@ dotenv.config();
 // };
 
 
-// app.use(cors(corsOption));
 const pubsub = new PubSub();
 const server = new ApolloServer({ typeDefs, resolvers, context: { pubsub } });
 
@@ -32,6 +31,7 @@ const server = new ApolloServer({ typeDefs, resolvers, context: { pubsub } });
 // });
 
 const app = express();
+// app.use(cors(corsOption));
 server.applyMiddleware({ app });
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -41,6 +41,6 @@ app.get('/', (req, res) => {
   res.send('Express server start!');
 });
 
-app.listen(4000, () => {
-  console.log(`서버가 작동중이에요! http://localhost:4000${server.graphqlPath}`);
+app.listen(8080, () => {
+  console.log(`서버가 작동중이에요! http://localhost:8080${server.graphqlPath}`);
 });
